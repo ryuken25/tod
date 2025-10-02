@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth or Dare - Atar vs Reni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --light-text: #f0f0f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Player Section */
+        .players-section ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .players-section li {
+            background-color: #f0f4f8;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .players-section li .remove-player {
+            background-color: #ff5252;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1;
+            transition: background-color 0.2s;
+        }
+
+        .players-section li .remove-player:hover {
+            background-color: #c50e29;
+        }
+
+
+        .add-player-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        #player-name-input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        #player-name-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Buttons */
+        button {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #add-player-btn {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        #add-player-btn:hover {
+            opacity: 0.9;
+        }
+
+        #spin-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #spin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Game Section */
+        .game-section {
+            margin-top: 30px;
+        }
+
+        .options-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .options-container label {
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+        }
+
+        #use-web-questions-checkbox {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+
+        #result-container {
+            background-color: #f9f9f9;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 20px 0;
+        }
+
+        #result-container p {
+            margin: 0;
+            color: #888;
+        }
+
+        #chosen-player {
+            margin: 5px 0;
+            font-size: 2.2em;
+            color: var(--primary-color);
+            min-height: 50px;
+        }
+
+        #choice-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        #truth-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #dare-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        #task-container {
+            background-color: #eaf2ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            min-height: 60px;
+        }
+
+        #task-text {
+            font-size: 1.1em;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Truth or Dare</h1>
+        
+        <div class="players-section">
+            <h2>Pemain</h2>
+            <ul id="player-list">
+                </ul>
+            <div class="add-player-form">
+                <input type="text" id="player-name-input" placeholder="Nama pemain baru...">
+                <button id="add-player-btn">Tambah</button>
+            </div>
+        </div>
+
+        <div class="game-section">
+            <div class="options-container">
+                <input type="checkbox" id="use-web-questions-checkbox" checked>
+                <label for="use-web-questions-checkbox">Gunakan Pertanyaan dari Website</label>
+            </div>
+
+            <button id="spin-btn">Pilih Pemain!</button>
+            
+            <div id="result-container">
+                <p>Giliran:</p>
+                <h2 id="chosen-player">...</h2>
+            </div>
+            
+            <div id="choice-container" class="hidden">
+                <button id="truth-btn">Truth</button>
+                <button id="dare-btn">Dare</button>
+            </div>
+
+            <div id="task-container" class="hidden">
+                <p id="task-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // === ELEMEN DOM ===
+            const playerNameInput = document.getElementById('player-name-input');
+            const addPlayerBtn = document.getElementById('add-player-btn');
+            const playerList = document.getElementById('player-list');
+            const spinBtn = document.getElementById('spin-btn');
+            const chosenPlayerEl = document.getElementById('chosen-player');
+            const choiceContainer = document.getElementById('choice-container');
+            const taskContainer = document.getElementById('task-container');
+            const taskTextEl = document.getElementById('task-text');
+            const truthBtn = document.getElementById('truth-btn');
+            const dareBtn = document.getElementById('dare-btn');
+            const useWebQuestionsCheckbox = document.getElementById('use-web-questions-checkbox');
+
+            // === DATA GAME ===
+            let players = ['Atar', 'Reni']; // Default players
+            let currentPlayer = ''; // Untuk menyimpan nama pemain yang terpilih
+
+            const truths = [
+                "Apa kebohongan terbesar yang pernah kamu katakan?",
+                "Siapa orang yang paling ingin kamu hindari saat ini?",
+                "Apa hal paling memalukan yang pernah terjadi padamu?",
+                "Kapan terakhir kali kamu menangis? Kenapa?",
+                "Apa rahasia yang belum pernah kamu ceritakan kepada siapa pun?",
+                "Jika kamu bisa bertukar hidup dengan satu orang di ruangan ini, siapa yang akan kamu pilih?",
+                "Apa hal tergila yang pernah kamu lakukan demi cinta?",
+                "Apa ketakutan terbesarmu?",
+                "Apa penyesalan terbesarmu dalam hidup?",
+                "Sebutkan satu hal yang ingin kamu ubah dari dirimu sendiri."
+            ];
+
+            const dares = [
+                "Tirukan suara hewan yang paling aneh selama 1 menit.",
+                "Biarkan orang lain menggambar sesuatu di wajahmu dengan spidol.",
+                "Kirim pesan 'Aku kangen' ke kontak ke-5 di HP kamu.",
+                "Bicara dengan aksen aneh sampai giliranmu berikutnya.",
+                "Posting foto selfie paling jelekmu ke media sosial.",
+                "Makan satu sendok sambal (jika ada).",
+                "Menari tarian TikTok yang sedang viral.",
+                "Telepon ibumu dan nyanyikan lagu 'Balonku Ada Lima'.",
+                "Berpura-pura menjadi patung selama 3 menit.",
+                "Biarkan orang lain memilih dan memposting satu status di media sosialmu."
+            ];
+
+            // === FUNGSI-FUNGSI ===
+
+            const renderPlayers = () => {
+                playerList.innerHTML = '';
+                players.forEach((player, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        ${player}
+                        <button class="remove-player" data-index="${index}">×</button>
+                    `;
+                    playerList.appendChild(li);
+                });
+            };
+
+            const addPlayer = () => {
+                const newName = playerNameInput.value.trim();
+                if (newName && !players.includes(newName)) {
+                    players.push(newName);
+                    playerNameInput.value = '';
+                    renderPlayers();
+                } else if (!newName) {
+                    alert("Nama pemain tidak boleh kosong!");
+                } else {
+                    alert("Nama pemain sudah ada!");
+                }
+            };
+
+            const removePlayer = (index) => {
+                players.splice(index, 1);
+                renderPlayers();
+            };
+
+            const selectPlayer = () => {
+                if (players.length < 2) {
+                    alert("Minimal harus ada 2 pemain untuk memulai!");
+                    return;
+                }
+
+                choiceContainer.classList.add('hidden');
+                taskContainer.classList.add('hidden');
+                
+                let spinCount = 0;
+                const spinInterval = setInterval(() => {
+                    const randomIndex = Math.floor(Math.random() * players.length);
+                    chosenPlayerEl.textContent = players[randomIndex];
+                    spinCount++;
+                    if (spinCount > 15) {
+                        clearInterval(spinInterval);
+                        const finalIndex = Math.floor(Math.random() * players.length);
+                        currentPlayer = players[finalIndex];
+                        chosenPlayerEl.textContent = currentPlayer;
+                        choiceContainer.classList.remove('hidden');
+                    }
+                }, 100);
+            };
+
+            const showTruth = () => {
+                if (useWebQuestionsCheckbox.checked) {
+                    const randomIndex = Math.floor(Math.random() * truths.length);
+                    taskTextEl.textContent = truths[randomIndex];
+                } else {
+                    taskTextEl.textContent = `Para pemain, berikan pertanyaan 'Truth' yang menantang untuk ${currentPlayer}!`;
+                }
+                taskContainer.classList.remove('hidden');
+                choiceContainer.classList.add('hidden');
+            };
+
+            const showDare = () => {
+                if (useWebQuestionsCheckbox.checked) {
+                    const randomIndex = Math.floor(Math.random() * dares.length);
+                    taskTextEl.textContent = dares[randomIndex];
+                } else {
+                    taskTextEl.textContent = `Para pemain, berikan tantangan 'Dare' yang seru untuk ${currentPlayer}!`;
+                }
+                taskContainer.classList.remove('hidden');
+                choiceContainer.classList.add('hidden');
+            };
+
+            // === EVENT LISTENERS ===
+
+            addPlayerBtn.addEventListener('click', addPlayer);
+            playerNameInput.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') addPlayer();
+            });
+            playerList.addEventListener('click', (event) => {
+                if (event.target.classList.contains('remove-player')) {
+                    const indexToRemove = parseInt(event.target.getAttribute('data-index'));
+                    removePlayer(indexToRemove);
+                }
+            });
+            spinBtn.addEventListener('click', selectPlayer);
+            truthBtn.addEventListener('click', showTruth);
+            dareBtn.addEventListener('click', showDare);
+            
+            // Inisialisasi
+            renderPlayers();
+        });
+    </script>
+
+</body>
+</html>

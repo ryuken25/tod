@@ -3,25 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truth or Dare - Atar vs Reni</title>
+    <title>Truth or Dare - Gemoy Edition</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
+        /* Variabel Warna & Font */
         :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
+            --bg-gradient-start: #e0f7fa; /* Light Cyan */
+            --bg-gradient-end: #e8eaf6;   /* Lavender Tint */
             --card-bg: #ffffff;
-            --text-color: #333;
-            --light-text: #f0f0f0;
-            --shadow-color: rgba(0, 0, 0, 0.1);
+            --primary-color: #6a11cb;    /* Deep Purple for accents */
+            --secondary-color: #2575fc;  /* Bright Blue for accents */
+            --accent-light: #bbdefb;     /* Light Blue */
+            --accent-pink: #f8bbd0;     /* Light Pink */
+            --text-dark: #424242;
+            --text-light: #757575;
+            --button-truth: #a5d6a7;     /* Light Green */
+            --button-dare: #ef9a9a;      /* Light Red */
+            --button-text: #333;
+            --shadow-soft: rgba(0, 0, 0, 0.08);
+            --border-radius-lg: 25px;
+            --border-radius-md: 15px;
+            --font-main: 'Quicksand', sans-serif;
+            --font-heading: 'Comfortaa', cursive;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--text-color);
+            font-family: var(--font-main);
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            color: var(--text-dark);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,28 +42,35 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            line-height: 1.6;
         }
 
         .container {
             background-color: var(--card-bg);
-            padding: 30px 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow-color);
+            padding: 35px 45px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 12px 30px var(--shadow-soft);
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
             text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.6); /* Soft border */
         }
 
         h1 {
+            font-family: var(--font-heading);
             color: var(--primary-color);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         h2 {
-            color: #555;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            font-family: var(--font-heading);
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--accent-light);
+            padding-bottom: 12px;
+            margin-bottom: 22px;
+            font-size: 1.6em;
         }
 
         /* Player Section */
@@ -60,40 +80,43 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
 
         .players-section li {
-            background-color: #f0f4f8;
-            padding: 8px 15px;
-            border-radius: 20px;
+            background-color: var(--accent-light);
+            padding: 10px 18px;
+            border-radius: var(--border-radius-md);
             font-weight: 600;
+            color: var(--text-dark);
             display: flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
         }
 
         .players-section li .remove-player {
-            background-color: #ff5252;
+            background-color: var(--accent-pink);
             color: white;
             border: none;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             cursor: pointer;
             font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center;
             line-height: 1;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            font-size: 1.1em;
         }
 
         .players-section li .remove-player:hover {
-            background-color: #c50e29;
+            background-color: #e57373; /* Slightly darker pink */
+            transform: scale(1.1);
         }
-
 
         .add-player-form {
             display: flex;
@@ -102,27 +125,39 @@
 
         #player-name-input {
             flex-grow: 1;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 14px;
+            border: 2px solid var(--accent-light);
+            border-radius: var(--border-radius-md);
+            font-size: 1.05em;
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            background-color: #fcfcfc;
+            transition: border-color 0.3s ease;
+        }
+
+        #player-name-input::placeholder {
+            color: var(--text-light);
+            opacity: 0.8;
         }
 
         #player-name-input:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
         }
 
         /* Buttons */
         button {
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 12px 20px;
-            border-radius: 8px;
+            font-family: var(--font-main);
+            font-size: 1em;
+            font-weight: 700;
+            padding: 12px 22px;
+            border-radius: var(--border-radius-md);
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: var(--button-text);
         }
 
         #add-player-btn {
@@ -132,101 +167,130 @@
 
         #add-player-btn:hover {
             opacity: 0.9;
+            transform: translateY(-1px);
         }
 
         #spin-btn {
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: var(--light-text);
+            color: white;
             width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 18px;
+            font-size: 1.3em;
+            margin-top: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius-lg);
+            letter-spacing: 0.5px;
         }
 
         #spin-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
 
         /* Game Section */
         .game-section {
-            margin-top: 30px;
+            margin-top: 35px;
         }
 
         .options-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            gap: 10px;
+            padding: 12px;
+            background-color: #f5f5f5; /* Light grey for contrast */
+            border-radius: var(--border-radius-md);
+            margin-bottom: 25px;
+            box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
         }
 
         .options-container label {
             font-weight: 600;
-            color: #555;
+            color: var(--text-light);
             cursor: pointer;
+            font-size: 0.95em;
         }
 
         #use-web-questions-checkbox {
             cursor: pointer;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color); /* Tint the checkbox */
         }
 
-
         #result-container {
-            background-color: #f9f9f9;
-            border: 2px dashed #ddd;
-            border-radius: 10px;
-            padding: 10px;
-            margin: 20px 0;
+            background-color: #fefefe;
+            border: 2px dashed var(--accent-light);
+            border-radius: var(--border-radius-md);
+            padding: 15px;
+            margin: 25px 0;
         }
 
         #result-container p {
             margin: 0;
-            color: #888;
+            color: var(--text-light);
+            font-size: 0.9em;
         }
 
         #chosen-player {
-            margin: 5px 0;
-            font-size: 2.2em;
+            margin: 8px 0;
+            font-size: 2.8em;
+            font-family: var(--font-heading);
             color: var(--primary-color);
-            min-height: 50px;
+            min-height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
         }
 
         #choice-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
         #truth-btn {
-            background-color: #28a745;
-            color: white;
+            background-color: var(--button-truth);
+            color: var(--text-dark);
+            border: 1px solid #81c784;
+        }
+        #truth-btn:hover {
+            background-color: #81c784;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
 
         #dare-btn {
-            background-color: #dc3545;
-            color: white;
+            background-color: var(--button-dare);
+            color: var(--text-dark);
+            border: 1px solid #e57373;
+        }
+        #dare-btn:hover {
+            background-color: #e57373;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
 
         #task-container {
-            background-color: #eaf2ff;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            min-height: 60px;
+            background-color: #e3f2fd; /* Lightest blue */
+            padding: 25px;
+            border-radius: var(--border-radius-md);
+            margin-top: 25px;
+            min-height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #bbdefb;
         }
 
         #task-text {
-            font-size: 1.1em;
+            font-size: 1.2em;
             margin: 0;
             line-height: 1.5;
+            color: var(--text-dark);
         }
 
         .hidden {
@@ -237,15 +301,15 @@
 <body>
 
     <div class="container">
-        <h1>Truth or Dare</h1>
+        <h1>Truth or Dare! <i class="fas fa-heart" style="color: #f8bbd0; font-size: 0.8em;"></i></h1>
         
         <div class="players-section">
-            <h2>Pemain</h2>
+            <h2>Pemain <i class="fas fa-users" style="color: #bbdefb; font-size: 0.9em;"></i></h2>
             <ul id="player-list">
                 </ul>
             <div class="add-player-form">
                 <input type="text" id="player-name-input" placeholder="Nama pemain baru...">
-                <button id="add-player-btn">Tambah</button>
+                <button id="add-player-btn">Tambah <i class="fas fa-plus-circle"></i></button>
             </div>
         </div>
 
@@ -255,7 +319,7 @@
                 <label for="use-web-questions-checkbox">Gunakan Pertanyaan dari Website</label>
             </div>
 
-            <button id="spin-btn">Pilih Pemain!</button>
+            <button id="spin-btn">Pilih Pemain! <i class="fas fa-dice"></i></button>
             
             <div id="result-container">
                 <p>Giliran:</p>
@@ -263,8 +327,8 @@
             </div>
             
             <div id="choice-container" class="hidden">
-                <button id="truth-btn">Truth</button>
-                <button id="dare-btn">Dare</button>
+                <button id="truth-btn">Truth <i class="fas fa-lightbulb"></i></button>
+                <button id="dare-btn">Dare <i class="fas fa-bolt"></i></button>
             </div>
 
             <div id="task-container" class="hidden">
@@ -293,130 +357,161 @@
             let players = ['Atar', 'Reni']; // Default players
             let currentPlayer = ''; // Untuk menyimpan nama pemain yang terpilih
 
+            // Daftar Truths
             const truths = [
-                "Apa kebohongan terbesar yang pernah kamu katakan?",
-                "Siapa orang yang paling ingin kamu hindari saat ini?",
-                "Apa hal paling memalukan yang pernah terjadi padamu?",
-                "Kapan terakhir kali kamu menangis? Kenapa?",
-                "Apa rahasia yang belum pernah kamu ceritakan kepada siapa pun?",
-                "Jika kamu bisa bertukar hidup dengan satu orang di ruangan ini, siapa yang akan kamu pilih?",
-                "Apa hal tergila yang pernah kamu lakukan demi cinta?",
-                "Apa ketakutan terbesarmu?",
-                "Apa penyesalan terbesarmu dalam hidup?",
-                "Sebutkan satu hal yang ingin kamu ubah dari dirimu sendiri."
+                "Apa rahasia paling konyol yang pernah kamu simpan?",
+                "Siapa karakter kartun favoritmu saat kecil dan mengapa?",
+                "Apa hal paling memalukan yang pernah kamu lakukan di depan umum?",
+                "Jika kamu bisa punya kekuatan super, apa yang akan kamu pilih dan kenapa?",
+                "Kapan terakhir kali kamu salah mengirim pesan dan ke siapa?",
+                "Apa makanan yang menurutmu aneh tapi kamu suka?",
+                "Apa mimpi teraneh yang pernah kamu alami?",
+                "Pernahkah kamu pura-pura sakit untuk tidak masuk sekolah/kerja?",
+                "Apa hal yang paling kamu takuti terjadi?",
+                "Sebutkan satu kebiasaan burukmu yang orang lain tidak tahu."
             ];
 
+            // Daftar Dares
             const dares = [
-                "Tirukan suara hewan yang paling aneh selama 1 menit.",
-                "Biarkan orang lain menggambar sesuatu di wajahmu dengan spidol.",
-                "Kirim pesan 'Aku kangen' ke kontak ke-5 di HP kamu.",
-                "Bicara dengan aksen aneh sampai giliranmu berikutnya.",
-                "Posting foto selfie paling jelekmu ke media sosial.",
-                "Makan satu sendok sambal (jika ada).",
-                "Menari tarian TikTok yang sedang viral.",
-                "Telepon ibumu dan nyanyikan lagu 'Balonku Ada Lima'.",
-                "Berpura-pura menjadi patung selama 3 menit.",
-                "Biarkan orang lain memilih dan memposting satu status di media sosialmu."
+                "Tirukan pose model fashion selama 30 detik.",
+                "Coba bicara tanpa menggunakan huruf 'R' selama satu menit.",
+                "Buatlah pantun lucu untuk orang di sebelah kananmu.",
+                "Menari konyol selama 20 detik dengan musik di kepalamu.",
+                "Ganti foto profil media sosialmu dengan selfie jelek selama 1 jam.",
+                "Telepon temanmu dan ucapkan 'Aku sayang kamu' dengan serius.",
+                "Pura-pura jadi robot dan ambilkan minum untuk semua orang.",
+                "Bernyanyilah keras-keras lagu anak-anak favoritmu.",
+                "Berikan pujian ke semua orang di ruangan ini secara berurutan.",
+                "Tulis 3 kata aneh di dahi dengan spidol yang bisa dihapus."
             ];
 
             // === FUNGSI-FUNGSI ===
 
+            // Fungsi untuk menampilkan daftar pemain ke layar
             const renderPlayers = () => {
-                playerList.innerHTML = '';
+                playerList.innerHTML = ''; // Kosongkan daftar sebelum diisi ulang
                 players.forEach((player, index) => {
                     const li = document.createElement('li');
                     li.innerHTML = `
                         ${player}
-                        <button class="remove-player" data-index="${index}">×</button>
+                        <button class="remove-player" data-index="${index}"><i class="fas fa-times"></i></button>
                     `;
                     playerList.appendChild(li);
                 });
             };
 
+            // Fungsi untuk menambah pemain baru
             const addPlayer = () => {
                 const newName = playerNameInput.value.trim();
-                if (newName && !players.includes(newName)) {
-                    players.push(newName);
-                    playerNameInput.value = '';
-                    renderPlayers();
-                } else if (!newName) {
-                    alert("Nama pemain tidak boleh kosong!");
+                if (newName) {
+                    if (!players.map(p => p.toLowerCase()).includes(newName.toLowerCase())) { // Cek duplikasi tanpa case-sensitive
+                        players.push(newName);
+                        playerNameInput.value = '';
+                        renderPlayers();
+                    } else {
+                        alert("Nama pemain sudah ada!");
+                    }
                 } else {
-                    alert("Nama pemain sudah ada!");
+                    alert("Nama pemain tidak boleh kosong!");
                 }
             };
 
+            // Fungsi untuk menghapus pemain
             const removePlayer = (index) => {
                 players.splice(index, 1);
                 renderPlayers();
             };
 
+            // Fungsi utama untuk memilih pemain secara acak
             const selectPlayer = () => {
                 if (players.length < 2) {
-                    alert("Minimal harus ada 2 pemain untuk memulai!");
+                    alert("Minimal harus ada 2 pemain untuk memulai permainan!");
                     return;
                 }
 
+                // Sembunyikan pilihan dan tugas sebelumnya
                 choiceContainer.classList.add('hidden');
                 taskContainer.classList.add('hidden');
                 
+                // Efek "mengacak"
                 let spinCount = 0;
                 const spinInterval = setInterval(() => {
                     const randomIndex = Math.floor(Math.random() * players.length);
                     chosenPlayerEl.textContent = players[randomIndex];
                     spinCount++;
-                    if (spinCount > 15) {
+                    if (spinCount > 15) { // Berhenti setelah beberapa kali ganti nama
                         clearInterval(spinInterval);
                         const finalIndex = Math.floor(Math.random() * players.length);
-                        currentPlayer = players[finalIndex];
+                        currentPlayer = players[finalIndex]; // Simpan nama pemain yang terpilih
                         chosenPlayerEl.textContent = currentPlayer;
-                        choiceContainer.classList.remove('hidden');
+                        choiceContainer.classList.remove('hidden'); // Tampilkan tombol Truth/Dare
                     }
                 }, 100);
             };
 
+            // Fungsi untuk menampilkan pertanyaan Truth
             const showTruth = () => {
+                // Cek apakah checkbox dicentang
                 if (useWebQuestionsCheckbox.checked) {
+                    // Jika ya, ambil pertanyaan dari daftar 'truths'
                     const randomIndex = Math.floor(Math.random() * truths.length);
                     taskTextEl.textContent = truths[randomIndex];
                 } else {
-                    taskTextEl.textContent = `Para pemain, berikan pertanyaan 'Truth' yang menantang untuk ${currentPlayer}!`;
+                    // Jika tidak, minta pertanyaan dari pemain lain
+                    taskTextEl.textContent = `Pemain lain, berikan pertanyaan 'Truth' yang seru untuk ${currentPlayer}!`;
                 }
                 taskContainer.classList.remove('hidden');
                 choiceContainer.classList.add('hidden');
             };
 
+            // Fungsi untuk menampilkan tantangan Dare
             const showDare = () => {
+                // Cek apakah checkbox dicentang
                 if (useWebQuestionsCheckbox.checked) {
+                    // Jika ya, ambil tantangan dari daftar 'dares'
                     const randomIndex = Math.floor(Math.random() * dares.length);
                     taskTextEl.textContent = dares[randomIndex];
                 } else {
-                    taskTextEl.textContent = `Para pemain, berikan tantangan 'Dare' yang seru untuk ${currentPlayer}!`;
+                    // Jika tidak, minta tantangan dari pemain lain
+                    taskTextEl.textContent = `Pemain lain, berikan tantangan 'Dare' yang menantang untuk ${currentPlayer}!`;
                 }
                 taskContainer.classList.remove('hidden');
                 choiceContainer.classList.add('hidden');
             };
 
+
             // === EVENT LISTENERS ===
 
+            // Menambah pemain saat tombol "Tambah" diklik
             addPlayerBtn.addEventListener('click', addPlayer);
+
+            // Menambah pemain saat menekan "Enter" di input
             playerNameInput.addEventListener('keyup', (event) => {
-                if (event.key === 'Enter') addPlayer();
+                if (event.key === 'Enter') {
+                    addPlayer();
+                }
             });
+
+            // Menghapus pemain (menggunakan event delegation)
             playerList.addEventListener('click', (event) => {
-                if (event.target.classList.contains('remove-player')) {
-                    const indexToRemove = parseInt(event.target.getAttribute('data-index'));
+                if (event.target.closest('.remove-player')) { // Gunakan closest untuk icon di dalam button
+                    const indexToRemove = parseInt(event.target.closest('.remove-player').getAttribute('data-index'));
                     removePlayer(indexToRemove);
                 }
             });
+
+            // Memilih pemain
             spinBtn.addEventListener('click', selectPlayer);
+
+            // Memilih Truth
             truthBtn.addEventListener('click', showTruth);
+
+            // Memilih Dare
             dareBtn.addEventListener('click', showDare);
             
-            // Inisialisasi
+            // Inisialisasi: tampilkan pemain default saat halaman dimuat
             renderPlayers();
         });
     </script>
-
 </body>
 </html>
